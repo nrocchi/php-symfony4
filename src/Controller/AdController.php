@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Form\AdType;
 use App\Repository\AdRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -28,29 +31,30 @@ class AdController extends AbstractController
     /**
      * Permet de créer une annonce
      *
-     * @Route("/ads/new', name="ads_create")
+     * @Route("/ads/new", name="ads_create")
      *
      * @return Response
      */
-    public function create() {
+    public function create(Request $request, ObjectManager $manager) {
         $ad = new Ad();
 
-        $form = $this->createFormBuilder($ad)
-                    ->add('title')
-                    ->add('introduction')
-                    ->add('content')
-                    ->add('rooms')
-                    ->add('price')
-                    ->add('coverImage')
-                    ->add('save',SubmitType::class, [
-                        'label' => 'Créer une nouvelle annonce',
-                        'attr' => [
-                            'class' => 'btn btn-primary'
-                        ]
-                    ])
-                    ->getForm();
+        $form = $this->createForm(AdType::class, $ad);
 
-        //chap 5 vid 5 en cours
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($ad);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "L'annonce <strong>{$ad->getTitle()}</strong> a bien été enregistrée !"
+            );
+
+            return $this->redirectToRoute('ads_show', [
+               'slug' => $ad->getSlug()
+            ]);
+        }
 
         return $this->render('ad/new.html.twig', [
             'form' => $form->createView()

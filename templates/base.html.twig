@@ -10,38 +10,17 @@
     </head>
     <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ path('homepage') }}">Symfony4</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        {% include 'partials/header.html.twig' %}
 
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('ads_index') }}">Annonces</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Mon compte</a>
-                </li>
-            </ul>
-
-        </div>
-    </nav>
-
-    {% block body %}
-
-    {% endblock %}
+        {% block body %}{% endblock %}
 
         {% block javascripts %}
             <script src="{{ asset('/js/jquery.min.js') }}"></script>
             <script src="{{ asset('/js/popper.min.js') }}"></script>
             <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
         {% endblock %}
+
+        {% include 'partials/footer.html.twig' %}
+
     </body>
 </html>
