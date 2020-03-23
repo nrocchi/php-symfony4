@@ -7,25 +7,36 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
+                <a class="nav-link" href="{{ path('homepage') }}"><i class="fas fa-home"></i>Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('ads_index') }}">Annonces</a>
+                <a class="nav-link" href="{{ path('ads_index') }}"><i class="fas fa-fire"></i>Annonces</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Mon compte</a>
-            </li>
+            {% if app.user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('account_logout') }}"><i class="fas fa-sign-out-alt"></i>Déconnexion</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('account_register') }}"><i class="fas fa-user-plus"></i>Inscription</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('account_login') }}"><i class="fas fa-sign-in-alt"></i>Connexion</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </nav>
 
 {% for label, messages in app.flashes %}
-    <div class="container">
-        <div class="alert alert-{{ label }}">
+    <div class="main container">
+        <div class="alert alert-{{ label }} alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <i class="fas fa-info-circle"></i>
             {% for message in messages %}
-                <div>{{ message | raw }}</div>
+                <span>{{ message | raw }}</span>
             {% endfor %}
         </div>
     </div>

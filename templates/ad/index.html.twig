@@ -3,7 +3,7 @@
 {% block title %}Nos magnifiques annonces{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="main container">
     <h1 class="my-3">Voici les annonces de nos hôtes !</h1>
 
     <div class="row">
@@ -18,7 +18,7 @@
                         <small>Pas encore noté</small>
                     </div>
                     <a href="{{ url }}">
-                        <img src="{{ ad.coverImage }}" alt="" style="height: 200px; width: 100%; display: block">
+                        <img src="{{ ad.coverImage }}" alt="{{ ad.title }}" class="img-fluid">
                     </a>
                     <div class="card-body">
                         <a href="{{ url }}">

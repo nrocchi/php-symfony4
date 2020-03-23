@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <div class="adtitle" style="background-image: url({{ ad.coverImage }})">
+    <div class="adtitle" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ ad.coverImage }})">
         <div class="container">
             <h1>{{ ad.title }}</h1>
             <p>{{ ad.introduction }}</p>
             <p class="h2">
                 <strong>{{ ad.rooms }} chambres</strong> pour <strong>{{ ad.price }}&euro;</strong> par nuit
             </p>
-            <a href="#" class="btn btn-primary">Réserver</a>
+            <a href="#" class="btn btn-secondary">Réserver</a>
         </div>
     </div>
-    <div class="container">
+    <div class="main container">
         <div class="row">
             <div class="col-8 mb-3">
                 {{ ad.content|raw }}
@@ -30,7 +30,7 @@
                         {% for image in ad.images %}
                             <div class="carousel-item {% if loop.first %}active{% endif %}">
                                 <img src="{{ image.url }}" class="d-block" alt="{{ image.caption }}">
-                                <div class="carousel-caption d-none d-md-block">
+                                <div class="carousel-caption d-none d-md-block w-100 p-2">
                                     <h5>{{ ad.title }}</h5>
                                     <p>{{ image.caption }}</p>
                                 </div>

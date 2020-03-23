@@ -2,9 +2,12 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Symfony4 - {% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Bienvenue !{% endblock %} | Symfony4</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('/css/fontawesome.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('/css/solid.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('/css/brands.min.css') }}">
             <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
         {% endblock %}
     </head>

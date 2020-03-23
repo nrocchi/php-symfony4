@@ -1,22 +1,29 @@
-div.container {
-    margin-top: 20px;
+.main {
+    margin-top: 2rem;
 }
 
 div.adtitle {
-    padding: 2em;
+    padding: 2rem;
     background-size: cover;
     background-position: center center;
 }
 
 div.adtitle h1, div.adtitle p {
     color: white;
-    text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+    /*text-shadow: 3px 3px 3px rgba(0,0,0,0.5);*/
 }
 
 div.carousel-caption {
-    text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+    /*text-shadow: 3px 3px 3px rgba(0,0,0,0.5);*/
+    position: absolute;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 a {
     color: #444;
+}
+
+i.fas, i.fab {
+    margin-right: 0.25rem;
 }
