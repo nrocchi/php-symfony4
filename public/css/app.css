@@ -20,10 +20,19 @@ div.carousel-caption {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-a {
-    color: #444;
+hr {
+    border-top: 1px solid rgba(255,255,255,0.5);
 }
 
 i.fas, i.fab {
     margin-right: 0.25rem;
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+.avatar-mini {
+    width: 30px;
+    height: auto;
 }
