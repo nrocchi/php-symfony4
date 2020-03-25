@@ -36,3 +36,15 @@ i.fas, i.fab {
     width: 30px;
     height: auto;
 }
+
+.card-body a {
+    color: #007053;
+}
+
+.card-body a:hover {
+    color: #00bc8c;
+}
+
+.card-body a.btn {
+    color: #fff;
+}
