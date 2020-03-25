@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
+    {% set url = path('ads_show', {'slug': ad.slug}) %}
+
     <div class="adtitle" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ ad.coverImage }})">
         <div class="container">
             <h1>{{ ad.title }}</h1>
