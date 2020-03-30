@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vos réservations{% endblock %}
+{% block title %}Mes réservations{% endblock %}
 
 
 {% block body %}
 
     <div class="main container">
-        <h1>Vos réservations</h1>
+        <h1>Mes réservations</h1>
         <div class="alert alert-info mt-3">
             Retrouvez ci-dessous toutes vos réservations
         </div>
@@ -16,6 +16,17 @@
             <div class="row mt-5">
                 <div class="col-4">
                     <img src="{{ ad.coverImage }}" alt="Photo de {{ ad.title }}" class="img-fluid">
+
+                    <div class="mt-3">
+                        {% set comment = ad.commentFromAuthor(app.user) %}
+                        {% if comment is not null %}
+                            <strong>Note donnée : </strong>
+                            {% include 'partials/rating.html.twig' with {'rating': comment.rating} %}
+                        {% else %}
+                            <p>Vous n'avez pas encore noté cette annonce.</p>
+                            <a href="{{ path('booking_show', {'id': booking.id}) }}#comment">Donner votre avis</a>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="col-8">
                     <h4>{{ ad.title }}</h4>
