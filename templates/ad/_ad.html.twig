@@ -3,7 +3,7 @@
 <div class="col-md-4">
     <div class="class bg-light mb-3">
         <div class="card-header text-center">
-            {{ ad.rooms }} chambres, <strong>{{ ad.price }}&euro; / nuit</strong>
+            {{ ad.rooms }} chambres, <strong>{{ ad.price | number_format(2, ',', ' ') }} &euro; / nuit</strong>
             <br>
 
             {% if ad.comments|length > 0 %}
@@ -24,7 +24,7 @@
             <p class="card-text">
                 {{ ad.introduction }}
             </p>
-            <a href="{{ url }}" class="btn btn-secondary mr-3 mb-0 mb-md-3 mb-xl-0">En savoir plus</a>
+            <a href="{{ url }}" class="btn btn-primary mr-3 mb-0 mb-md-3 mb-xl-0">En savoir plus</a>
             {% if app.user and app.user == ad.author %}
                 <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-secondary mr-3 mb-0 mb-md-3 mb-xl-0">Modifier l'annonce</a>
                 <a href="{{ path('ads_delete', {'slug': ad.slug}) }}" class="btn btn-danger mt-3 mt-sm-0 mt-xl-3" onclick="return confirm(`Etes-vous sûr de vouloir supprimer l'annonce : {{ ad.title }} ?`)">Supprimer l'annonce</a>

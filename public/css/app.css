@@ -41,15 +41,20 @@ i.fa-star {
     height: auto;
 }
 
-.card-body a {
+a, a:hover, .card-body a, .alert a, .card-body a:hover, .alert a:hover {
+    text-decoration: none;
+    outline: 0;
+}
+
+.card-body a, .alert a {
     color: #007053;
 }
 
-.card-body a:hover {
+.card-body a:hover, .alert a:hover {
     color: #00bc8c;
 }
 
-.card-body a.btn {
+.card-body a.btn, .alert a.btn {
     color: #fff;
 }
 
