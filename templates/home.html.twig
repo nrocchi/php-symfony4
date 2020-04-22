@@ -36,36 +36,27 @@
                     <h1 class="card-header">Nos propriétaires stars !</h1>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="card bg-secondary border-info mb-3">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Lior Chamla</h4>
-                                        <div class="card-text">
-                                            <img src="http://placehold.it/64x64" alt="Avatar de Lior Chamla" class="rounded-circle float-left mr-3">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                Adipisci aliquam dolorum exercitationem modi ratione sapiente.
-                                                Alias asperiores atque deleniti et hic illo modi nam obcaecati, officia quae quis suscipit voluptatibus.
-                                            </p>
-                                            <a href="#" class="btn btn-info float-right">En savoir plus</a>
+                            {% for user in users  %}
+                                <div class="col-md-6">
+                                    <div class="card border-info p-3 mb-3">
+                                        <div class="card-header d-flex flex-column flex-lg-row align-items-center">
+                                            <img src="{{ user.picture }}" class="rounded-circle mr-lg-3" width="100px" alt="Avatar de {{ user.fullName }}">
+                                            <div class="my-3 my-lg-0 text-center text-lg-left">
+                                                <h3 class="my-0">{{ user.fullName }}</h3>
+                                                <p class="text-muted mb-0">{{ user.email }}</p>
+                                                {% if user is same as (app.user) %}
+                                                    <a href="{{ path('account_profile') }}" class="card-link text-info d-block d-lg-inline-block mb-2 mb-lg-0 mx-auto mr-lg-3 mt-3">Modifier mon profil</a>
+                                                    <a href="{{ path('account_password') }}" class="card-link text-info d-block d-lg-inline-block mx-auto ml-lg-auto">Modifier mon mot de passe</a>
+                                                {% endif %}
+                                            </div>
+                                            <div class="badge badge-info mx-auto mx-lg-0 ml-lg-auto">{{ user.ads |length }} annonces</div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-text">{{ user.description | raw }}</div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card bg-secondary border-info mb-3">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Lior Chamla</h4>
-                                        <div class="card-text">
-                                            <img src="http://placehold.it/64x64" alt="Avatar de Lior Chamla" class="rounded-circle float-left mr-3">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                Adipisci aliquam dolorum exercitationem modi ratione sapiente.
-                                                Alias asperiores atque deleniti et hic illo modi nam obcaecati, officia quae quis suscipit voluptatibus.
-                                            </p>
-                                            <a href="#" class="btn btn-info float-right">En savoir plus</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
