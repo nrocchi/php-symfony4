@@ -96,7 +96,7 @@
                             <div class="card-header d-flex flex-column align-items-center">
                                 <img src="{{ a.picture }}" class="rounded-circle" width="100px" alt="Avatar de {{ a.fullName }}">
                                 <div class="my-3 text-center">
-                                    <h3 class="my-0">{{ a.fullName }}</h3>
+                                    <a href="{{ path('user_show', {'slug': a.slug}) }}" class="text-info"><h3 class="my-0">{{ a.fullName }}</h3></a>
                                     <div class="text-muted">{{ a.email }}</div>
                                 </div>
                                 <div class="badge badge-info mx-auto">{{ a.ads |length }} annonces</div>

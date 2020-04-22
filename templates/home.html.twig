@@ -42,7 +42,7 @@
                                         <div class="card-header d-flex flex-column flex-lg-row align-items-center">
                                             <img src="{{ user.picture }}" class="rounded-circle mr-lg-3" width="100px" alt="Avatar de {{ user.fullName }}">
                                             <div class="my-3 my-lg-0 text-center text-lg-left">
-                                                <h3 class="my-0">{{ user.fullName }}</h3>
+                                                <a href="{{ path('user_show', {'slug': user.slug}) }}" class="text-info"><h3 class="my-0">{{ user.fullName }}</h3></a>
                                                 <p class="text-muted mb-0">{{ user.email }}</p>
                                                 {% if user is same as (app.user) %}
                                                     <a href="{{ path('account_profile') }}" class="card-link text-info d-block d-lg-inline-block mb-2 mb-lg-0 mx-auto mr-lg-3 mt-3">Modifier mon profil</a>
