@@ -1,7 +1,7 @@
 {% set url = path('ads_show', {'slug': ad.slug}) %}
 
-<div class="col-md-4">
-    <div class="class bg-light mb-3">
+<div class="col-md-6 col-lg-4">
+    <div class="card border-info mb-3">
         <div class="card-header text-center">
             {{ ad.rooms }} chambres, <strong>{{ ad.price | number_format(2, ',', ' ') }} &euro; / nuit</strong>
             <br>
@@ -15,19 +15,22 @@
         <a href="{{ url }}">
             <img src="{{ ad.coverImage }}" alt="{{ ad.title }}" class="img-fluid">
         </a>
-        <div class="card-body">
-            <a href="{{ url }}">
-                <h4 class="card-title">
-                    {{ ad.title }}
-                </h4>
-            </a>
-            <p class="card-text">
-                {{ ad.introduction }}
-            </p>
-            <a href="{{ url }}" class="btn btn-primary mr-3 mb-0 mb-md-3 mb-xl-0">En savoir plus</a>
+        <div class="card-body bg-secondary p-0">
+            <div class="p-3">
+                <a href="{{ url }}" class="text-info">
+                    <h4 class="card-title">{{ ad.title }}</h4>
+                </a>
+                <p class="card-text">{{ ad.introduction }}</p>
+                <a href="{{ url }}" class="btn btn-info">En savoir plus</a>
+            </div>
             {% if app.user and app.user == ad.author %}
-                <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-secondary mr-3 mb-0 mb-md-3 mb-xl-0">Modifier l'annonce</a>
-                <a href="{{ path('ads_delete', {'slug': ad.slug}) }}" class="btn btn-danger mt-3 mt-sm-0 mt-xl-3" onclick="return confirm(`Etes-vous sûr de vouloir supprimer l'annonce : {{ ad.title }} ?`)">Supprimer l'annonce</a>
+                <div class="card-footer pb-0 pt-3 w-100">
+                    <div class="float-right">
+                        <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-info mr-1 mb-3">Modifier</a>
+                        <a href="{{ path('ads_delete', {'slug': ad.slug}) }}" class="btn btn-danger mb-3"
+                           onclick="return confirm(`Etes-vous sûr de vouloir supprimer l'annonce : {{ ad.title }} ?`)">Supprimer</a>
+                    </div>
+                </div>
             {% endif %}
         </div>
     </div>

@@ -1,13 +1,10 @@
 {% block _ad_images_widget %}
     <h6><i>Ajouter vos images :</i></h6>
-
-    {{ form_widget(form) }}
-
     <input type="hidden" id="widgets_counter" value="0">
-
     <div class="form-group">
-        <button type="button" id="ad_image" class="btn btn-primary">Ajouter une image</button>
+        <button type="button" id="ad_image" class="btn btn-info">Ajouter une image</button>
     </div>
+    {{ form_widget(form) }}
 {% endblock %}
 
 {% block _ad_images_entry_row %}
@@ -18,19 +15,19 @@
     <div class="form-group" id="block_{{ id }}">
         {{ form_errors(form) }}
         <div class="row">
-            <div class="col-10">
+            <div class="col-md-11">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-6 mb-3 mb-md-0">
                         {{ form_widget(form.url) }}
                         {{ form_errors(form.url) }}
                     </div>
-                    <div class="col">
+                    <div class="col-md-6 mb-3 mb-md-0">
                         {{ form_widget(form.caption) }}
                         {{ form_errors(form.caption) }}
                     </div>
                 </div>
             </div>
-            <div class="col-2 text-right pl-0">
+            <div class="col-md-1 text-md-right pl-md-0">
                 <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger">x</button>
             </div>
         </div>

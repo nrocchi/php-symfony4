@@ -4,115 +4,68 @@
     Bienvenue sur le meilleur réseau d'appartements
 {% endblock %}
 
-
 {% block body %}
-    <div class="main container">
-        <div class="jumbotron mt-3">
+    <div class="container mt-5">
+        <div class="jumbotron">
             <h1 class="display-3">Bienvenue sur Symfony4</h1>
             <p class="lead">Nous mettons en relation les voyageurs et les propriétaires qui veulent profiter d'opportunités et gagner de l'argent en proposant leurs biens à la location.</p>
-            <hr class="my-4">
+            <hr class="bg-light my-4">
             <p>Vous êtes voyageur ? Et vous voulez voir où vous pourrez loger pour votre prochain déplacement ?</p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Voir nos annonces</a>
+                <a class="btn btn-info btn-lg" href="#" role="button">Voir nos annonces</a>
             </p>
         </div>
-
-        <h2 class="h1 my-5">Nos appartements stars</h2>
-
         <div class="row">
-            <div class="col-md-4">
-                <div class="class bg-light mb-3">
-                    <div class="card-header text-center">
-                        3 chambres, <strong>40&euro; / nuit</strong>
-                        <br>
-                        <small>Pas encore noté</small>
-                    </div>
-                    <img src="http://placehold.it/1000x400" alt="Photo de l'appartement" style="height: 200px; width: 100%; display: block">
+            <div class="col-12">
+                <div class="card p-3">
+                    <h1 class="card-header">Nos appartements stars !</h1>
                     <div class="card-body">
-                        <h4 class="card-title">
-                            Appartement de ouf !
-                        </h4>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab dicta doloribus maiores officia officiis perspiciatis rerum. 
-                            Cumque, harum natus officia perspiciatis quas tempore tenetur vitae voluptate! Consequuntur mollitia nesciunt reiciendis?
-                        </p>
-                        <a href="#" class="btn btn-secondary">En savoir plus</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="class bg-light mb-3">
-                    <div class="card-header text-center">
-                        3 chambres, <strong>40&euro; / nuit</strong>
-                        <br>
-                        <small>Pas encore noté</small>
-                    </div>
-                    <img src="http://placehold.it/1000x400" alt="Photo de l'appartement" style="height: 200px; width: 100%; display: block">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            Appartement de ouf !
-                        </h4>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab dicta doloribus maiores officia officiis perspiciatis rerum.
-                            Cumque, harum natus officia perspiciatis quas tempore tenetur vitae voluptate! Consequuntur mollitia nesciunt reiciendis?
-                        </p>
-                        <a href="#" class="btn btn-secondary">En savoir plus</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="class bg-light mb-3">
-                    <div class="card-header text-center">
-                        3 chambres, <strong>40&euro; / nuit</strong>
-                        <br>
-                        <small>Pas encore noté</small>
-                    </div>
-                    <img src="http://placehold.it/1000x400" alt="Photo de l'appartement" style="height: 200px; width: 100%; display: block">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            Appartement de ouf !
-                        </h4>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab dicta doloribus maiores officia officiis perspiciatis rerum.
-                            Cumque, harum natus officia perspiciatis quas tempore tenetur vitae voluptate! Consequuntur mollitia nesciunt reiciendis?
-                        </p>
-                        <a href="#" class="btn btn-secondary">En savoir plus</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="h1 my-5">Nos propriétaires stars</h2>
-
-        <div class="row">
-            <div class="col">
-                <div class="card border-secondary mb-3">
-                    <div class="card-body">
-                        <h4 class="card-title">Lior Chamla</h4>
-                        <hr>
-                        <div class="card-text">
-                            <img src="http://placehold.it/64x64" alt="Avatar de Lior Chamla" class="float-left mr-3">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Adipisci aliquam dolorum exercitationem modi ratione sapiente.
-                                Alias asperiores atque deleniti et hic illo modi nam obcaecati, officia quae quis suscipit voluptatibus.
-                            </p>
-                            <a href="#" class="btn btn-success float-right">En savoir plus</a>
+                        <div class="row">
+                            {% for ad in ads %}
+                                {% include 'ad/_ad.html.twig' %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card border-secondary mb-3">
+        </div>
+        <hr class="bg-light my-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card p-3">
+                    <h1 class="card-header">Nos propriétaires stars !</h1>
                     <div class="card-body">
-                        <h4 class="card-title">Lior Chamla</h4>
-                        <hr>
-                        <div class="card-text">
-                            <img src="http://placehold.it/64x64" alt="Avatar de Lior Chamla" class="float-left mr-3">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Adipisci aliquam dolorum exercitationem modi ratione sapiente.
-                                Alias asperiores atque deleniti et hic illo modi nam obcaecati, officia quae quis suscipit voluptatibus.
-                            </p>
-                            <a href="#" class="btn btn-success float-right">En savoir plus</a>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card bg-secondary border-info mb-3">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Lior Chamla</h4>
+                                        <div class="card-text">
+                                            <img src="http://placehold.it/64x64" alt="Avatar de Lior Chamla" class="rounded-circle float-left mr-3">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                Adipisci aliquam dolorum exercitationem modi ratione sapiente.
+                                                Alias asperiores atque deleniti et hic illo modi nam obcaecati, officia quae quis suscipit voluptatibus.
+                                            </p>
+                                            <a href="#" class="btn btn-info float-right">En savoir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-secondary border-info mb-3">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Lior Chamla</h4>
+                                        <div class="card-text">
+                                            <img src="http://placehold.it/64x64" alt="Avatar de Lior Chamla" class="rounded-circle float-left mr-3">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                Adipisci aliquam dolorum exercitationem modi ratione sapiente.
+                                                Alias asperiores atque deleniti et hic illo modi nam obcaecati, officia quae quis suscipit voluptatibus.
+                                            </p>
+                                            <a href="#" class="btn btn-info float-right">En savoir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

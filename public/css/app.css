@@ -1,5 +1,5 @@
-.main {
-    margin-top: 2rem;
+.dropdown-item.active, .dropdown-item:active, .dropdown-item:hover, .dropdown-item:focus {
+    background-color: #3498DB;
 }
 
 div.adtitle {
@@ -20,10 +20,6 @@ div.carousel-caption {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-hr {
-    border-top: 1px solid rgba(255,255,255,0.5);
-}
-
 i.fas, i.fab, i.far {
     margin-right: 0.25rem;
 }
@@ -32,30 +28,9 @@ i.fa-star {
     margin-right: 0;
 }
 
-.avatar {
-    border-radius: 50%;
-}
-
-.avatar-mini {
-    width: 30px;
-    height: auto;
-}
-
 a, a:hover, .card-body a, .alert a, .card-body a:hover, .alert a:hover {
     text-decoration: none;
     outline: 0;
-}
-
-.card-body a, .alert a {
-    color: #007053;
-}
-
-.card-body a:hover, .alert a:hover {
-    color: #00bc8c;
-}
-
-.card-body a.btn, .alert a.btn {
-    color: #fff;
 }
 
 .datepicker table tr td.disabled,
@@ -64,7 +39,7 @@ a, a:hover, .card-body a, .alert a, .card-body a:hover, .alert a:hover {
 }
 
 .datepicker table tr td.active.active, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled.active, .datepicker table tr td.active.disabled.disabled, .datepicker table tr td.active.disabled:active, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active.disabled:hover.active, .datepicker table tr td.active.disabled:hover.disabled, .datepicker table tr td.active.disabled:hover:active, .datepicker table tr td.active.disabled:hover:hover, .datepicker table tr td.active.disabled:hover[disabled], .datepicker table tr td.active.disabled[disabled], .datepicker table tr td.active:active, .datepicker table tr td.active:hover, .datepicker table tr td.active:hover.active, .datepicker table tr td.active:hover.disabled, .datepicker table tr td.active:hover:active, .datepicker table tr td.active:hover:hover, .datepicker table tr td.active:hover[disabled], .datepicker table tr td.active[disabled] {
-    background-color: #00bc8c !important;
+    background-color: #258cd1 !important;
     background-image: none !important;
 }
 
