@@ -27,7 +27,7 @@
                                     <td>{{ comment.id }}</td>
                                     <td>{{ comment.createdAt | date('d M Y H:i') }}</td>
                                     <td>
-                                        <img src="{{ comment.author.picture }}" alt="Avatar de {{ comment.author.fullName }}" width="35px" class="rounded-circle mr-3">
+                                        <img src="{{ comment.author.picture }}" alt="Avatar de {{ comment.author.fullName }}" width="35px" class="rounded-circle mr-1">
                                         {{ comment.author.fullName }}
                                     </td>
                                     <td>{{ comment.content | truncate(50, '...') }}</td>
