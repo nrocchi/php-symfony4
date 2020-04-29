@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des réservations{% endblock %}
+
+{% block body %}
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card p-3">
+                    <h1 class="card-header">Gestion des réservations</h1>
+                    <div class="card-body">
+                        <table class="table table-hover table-responsive-md table-secondary">
+                            <thead class="bg-info">
+                            <tr>
+                                <th>Id</th>
+                                <th>Date</th>
+                                <th>Visiteur</th>
+                                <th>Annonce</th>
+                                <th>Début</th>
+                                <th>Fin</th>
+                                <th class="text-center">Durée</th>
+                                <th class="text-center">Montant</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for booking in bookings %}
+                                <tr>
+                                    <td>{{ booking.id }}</td>
+                                    <td>{{ booking.createdAt | date('d M Y H:i') }}</td>
+                                    <td>
+                                        <img src="{{ booking.booker.picture }}" alt="Avatar de {{ booking.booker.fullName }}" width="35px" class="rounded-circle mr-3">
+                                        {{ booking.booker.fullName }}
+                                    </td>
+                                    <td>{{ booking.ad.title }}</td>
+                                    <td>{{ booking.startDate | date('d M Y H:i') }}</td>
+                                    <td>{{ booking.endDate | date('d M Y H:i') }}</td>
+                                    <td class="text-center">
+                                        <span class="badge badge-info rounded p-2">{{ booking.duration }}</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success rounded p-2">{{ booking.amount | number_format(2, ',', ' ') }} &euro;</span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('admin_bookings_edit', {'id': booking.id}) }}" class="btn btn-info mr-1"><i class="fas fa-edit mx-0"></i></a>
+                                        <a href="{{ path('admin_bookings_delete', {'id': booking.id}) }}" class="btn btn-danger mt-1"><i class="fas fa-trash mx-0"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

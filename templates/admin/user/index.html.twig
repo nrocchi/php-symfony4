@@ -1,0 +1,66 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card p-3">
+                    <h1 class="card-header">Gestion des utilisateurs</h1>
+                    <div class="card-body">
+                        <table class="table table-hover table-responsive-xl table-secondary">
+                            <thead class="bg-info">
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Introduction</th>
+                                <th>Description</th>
+                                <th class="text-center">Administrateur</th>
+                                <th class="text-center">Annonces</th>
+                                <th class="text-center">Réservations</th>
+                                <th class="text-center">Commentaires</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ user.id }}</td>
+                                    <td>
+                                        <img src="{{ user.picture }}" alt="Avatar de {{ user.fullName }}" width="35px" class="rounded-circle mr-3">
+                                        {{ user.fullName }}
+                                    </td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.introduction }}</td>
+                                    <td>{{ user.description | truncate(50, '...') | raw }}</td>
+                                    <td class="text-center">
+                                        {% for role in user.roles if role == 'ROLE_ADMIN' %}
+                                            <i class="fas fa-check mr-1 text-success"></i>Oui
+                                        {% else %}
+                                            <i class="fas fa-times mr-1 text-danger"></i>Non
+                                        {% endfor %}
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-info rounded p-2">{{ user.ads | length | number_format(0, ',', ' ') }}</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-info rounded p-2">{{ user.bookings | length | number_format(0, ',', ' ') }}</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-info rounded p-2">{{ user.comments | length | number_format(0, ',', ' ') }}</span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('admin_users_delete', {'id': user.id}) }}" class="btn btn-danger"><i class="fas fa-trash mx-0"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des annonces{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card p-3">
+                <h1 class="card-header">Gestion des annonces</h1>
+                <div class="card-body">
+                    <table class="table table-hover table-responsive-sm table-secondary">
+                        <thead class="bg-info">
+                            <tr>
+                                <th>Id</th>
+                                <th>Titre</th>
+                                <th>Auteur</th>
+                                <th class="text-center">Réservations</th>
+                                <th class="text-center">Note</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ad in ads %}
+                                <tr>
+                                    <td>{{ ad.id }}</td>
+                                    <td>{{ ad.title }}</td>
+                                    <td>
+                                        <img src="{{ ad.author.picture }}" alt="Avatar de {{ ad.author.fullName }}" width="35px" class="rounded-circle mr-3">
+                                        {{ ad.author.fullName }}
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-info rounded p-2">{{ ad.bookings | length }}</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-warning rounded p-2">{{ ad.avgRatings | number_format(1, ',', ' ') }}</span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('admin_ads_edit', {'id': ad.id}) }}" class="btn btn-info mr-1"><i class="fas fa-edit mx-0"></i></a>
+                                        <a href="{{ path('admin_ads_delete', {'id': ad.id}) }}" class="btn btn-danger mt-1 mt-xl-0"><i class="fas fa-trash mx-0"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

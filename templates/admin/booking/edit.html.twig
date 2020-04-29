@@ -1,0 +1,80 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modification de la réservation n° {{ booking.id }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha256-siyOpF/pBWUPgIcQi17TLBkjvNgNQArcmwJB8YvkAgg=" crossorigin="anonymous" />
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="offset-md-2 col-md-8">
+                <div class="card border-info p-3">
+                    <h1 class="card-header">Modifier une réservation</h1>
+                    <div class="card-body">
+                        <div class="alert alert-info alert-dismissible mb-4 px-3">
+                            <button type="button" class="close pl-0" data-dismiss="alert">&times;</button>
+                            <i class="fas fa-info-circle"></i>
+                            Vous pouvez modifier la réservation n° <strong>{{ booking.id }}</strong>
+                        </div>
+                        {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.startDate) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.endDate) }}
+                            </div>
+                        </div>
+                        {{ form_widget(form) }}
+                        <div class="form-group alert alert-success">
+                            <h4>Montant du séjour : <strong><span id="amount">{{ booking.amount }}</span> &euro;</strong></h4>
+                            <span id="days">{{ booking.duration }}</span> nuit(s) à {{ booking.ad.price | number_format(2, ',', ' ') }}
+                            &euro; par nuit
+                        </div>
+                        <button type="submit" class="btn btn-info">Enregistrer</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha256-bqVeqGdJ7h/lYPq6xrPv/YGzMEb6dNxlfiTUHSgRCp8=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#admin_booking_startDate, #admin_booking_endDate').datepicker({
+                format: 'dd/mm/yyyy',
+                datesDisabled: [
+                    {% for day in booking.ad.notAvailableDays %}
+                        "{{ day.format('d/m/Y') }}",
+                    {% endfor %}
+                ],
+                startDate: new Date()
+            });
+            $('#admin_booking_startDate, #admin_booking_endDate').on('change', calculateAmount);
+        });
+
+        function calculateAmount() {
+            // on revert en format anglais
+            const startDate = new Date($('#admin_booking_startDate').val().replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1'));
+            const endDate = new Date($('#admin_booking_endDate').val().replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1'));
+
+            if (startDate && endDate && startDate < endDate) {
+                const DAY_TIME = 24 * 60 * 60 * 1000;
+
+                const interval = endDate.getTime() - startDate.getTime();
+                const days = interval / DAY_TIME;
+                const amount = days * {{ booking.ad.price }};
+
+                $('#days').text(days);
+                $('#amount').text(amount.toLocaleString('fr-FR'));
+            }
+        }
+    </script>
+{% endblock %}

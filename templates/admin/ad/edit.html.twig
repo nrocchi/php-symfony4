@@ -1,0 +1,133 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modification de l'annonce {{ ad.id }}{% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card border-info p-3">
+                    <h1 class="card-header">Modifier une annonce</h1>
+                    <div class="card-body">
+                        <div class="alert alert-info alert-dismissible mb-4 px-3">
+                            <button type="button" class="close pl-0" data-dismiss="alert">&times;</button>
+                            <i class="fas fa-info-circle"></i>
+                            Vous pouvez modifier l'annonce
+                        </div>
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <button type="submit" class="btn btn-info">Enregistrer</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-info p-3">
+                    <h1 class="card-header">Les réservations</h1>
+                    <div class="card-body">
+                        <div class="alert alert-info alert-dismissible mb-4 px-3">
+                            <button type="button" class="close pl-0" data-dismiss="alert">&times;</button>
+                            <i class="fas fa-info-circle"></i>
+                            Vous pouvez modifier les réservations de cette annonce
+                        </div>
+                        <table class="table table-hover table-secondary table-responsive-sm">
+                            <thead class="bg-info">
+                            <tr>
+                                <th>Id</th>
+                                <th>Voyageur</th>
+                                <th>Date de réservation</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                            </thead>
+                            {% for booking in ad.bookings %}
+                                <tr>
+                                    <td>{{ booking.id }}</td>
+                                    <td>{{ booking.booker.fullName }}</td>
+                                    <td>{{ booking.createdAt | date('d M Y H:i') }}</td>
+                                    <td class="text-center"><a href="#" class="btn btn-info"><i class="fas fa-pen mr-0"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="card border-info p-3 mt-3">
+                    <h1 class="card-header">Les commentaires</h1>
+                    <div class="card-body">
+                        <div class="alert alert-info alert-dismissible mb-4 px-3">
+                            <button type="button" class="close pl-0" data-dismiss="alert">&times;</button>
+                            <i class="fas fa-info-circle"></i>
+                            Vous pouvez modifier les commentaires de cette annonce
+                        </div>
+                        <table class="table table-hover table-secondary table-responsive-sm">
+                            <thead class="bg-info">
+                            <tr>
+                                <th>Id</th>
+                                <th>Voyageur</th>
+                                <th>Commentaire</th>
+                                <th class="text-center">Note</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                            </thead>
+                            {% for comment in ad.comments %}
+                                <tr>
+                                    <td>{{ comment.id }}</td>
+                                    <td>{{ comment.author.fullName }}</td>
+                                    <td>{{ comment.content }}</td>
+                                    <td class="text-center"><span class="badge badge-warning rounded p-2">{{ comment.rating }}</span></td>
+                                    <td>
+                                        <a href="{{ path('admin_comments_edit', {'id': comment.id}) }}" class="btn btn-info mr-1"><i class="fas fa-pen mx-0"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block _ad_images_widget %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _ad_images_entry_row %}
+    <div id="block_{{ id }}">
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+
+{% block _ad_images_entry_widget %}
+    <div class="row align-items-center mb-3 mx-0">
+        {% if value %}
+            <div class="col-md-4 mb-1 mb-md-0"
+                 style="background: url('{{ value.url }}') no-repeat center / cover !important; height: 100px;">
+            </div>
+        {% endif %}
+        <div class="col-md-6 px-0 px-md-3">
+            {#{{ form_row(form.caption, {'label':false}) }}#}
+            {{ form_row(form.caption) }}
+        </div>
+        <div class="col-md-2 px-0 px-md-3">
+            <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{ id }}">
+                <i class="fas fa-trash mr-0"></i>
+            </button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('[data-action="delete"]').on('click', function () {
+                const target = this.dataset.target;
+                $(target).remove();
+            });
+        });
+    </script>
+{% endblock %}
+

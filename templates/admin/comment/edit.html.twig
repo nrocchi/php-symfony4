@@ -1,0 +1,121 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modification du commentaire n°{{ comment.id }}{% endblock %}
+
+{% block body %}
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="offset-md-2 col-md-8">
+                <div class="card p-3">
+                    <h1 class="card-header">Modifier un commentaire</h1>
+                    <div class="card-body">
+                        <div class="alert alert-info alert-dismissible mb-4 px-3">
+                            <button type="button" class="close pl-0" data-dismiss="alert">&times;</button>
+                            <i class="fas fa-info-circle"></i>
+                            Vous pouvez modifier le commentaire
+                        </div>
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <button type="submit" class="btn btn-info">Enregistrer</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="offset-lg-2 col-md-6 col-lg-4">
+                <div class="card p-3">
+                    <h5 class="card-header">L'annonce du commentaire</h5>
+                    <div class="card-body">
+                        <div class="alert alert-info alert-dismissible mb-4 px-3">
+                            <button type="button" class="close pl-0" data-dismiss="alert">&times;</button>
+                            <i class="fas fa-info-circle"></i>
+                            Vous pouvez modifier l'annonce du commentaire
+                        </div>
+                        <div class="card border-info mb-3">
+                            <div class="card-header text-center">
+                                {{ comment.ad.rooms }} chambres, <strong>{{ comment.ad.price | number_format(2, ',', ' ') }} &euro; / nuit</strong>
+                                <br>
+                                {% if comment.ad.comments|length > 0 %}
+                                    {% include 'partials/rating.html.twig' with {'rating': comment.ad.avgRatings} %}
+                                {% else %}
+                                    <small>Pas encore noté</small>
+                                {% endif %}
+                            </div>
+                            <a href="{{ path('ads_show', {'slug': comment.ad.slug}) }}">
+                                <img src="{{ comment.ad.coverImage }}" alt="{{ comment.ad.title }}" class="img-fluid">
+                            </a>
+                            <div class="card-body bg-secondary p-0">
+                                <div class="p-3">
+                                    <a href="{{ path('ads_show', {'slug': comment.ad.slug}) }}" class="text-info">
+                                        <h4 class="card-title">{{ comment.ad.title }}</h4>
+                                    </a>
+                                    <p class="card-text">{{ comment.ad.introduction }}</p>
+                                    <a href="{{ path('admin_ads_edit', {'id': comment.ad.id}) }}" class="btn btn-info mr-1"><i class="fas fa-edit mx-0"></i></a>
+                                    <a href="{{ path('admin_ads_delete', {'id': comment.ad.id}) }}" class="btn btn-danger"><i class="fas fa-trash mx-0"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-3 mt-3">
+                    <h5 class="card-header">Les commentaires de l'annonce</h5>
+                    <div class="card-body">
+                        {% if comment.ad.comments|length > 0 %}
+                            <div class="alert alert-info">
+                                <h4 class="alert-heading text-center">
+                                    <div class="row align-items-center">
+                                        <div class="col">Note globale donnée par nos visiteurs</div>
+                                        <div class="col">
+                                            {% include 'partials/rating.html.twig' with {'rating': comment.ad.avgRatings} %}
+                                            <br>
+                                            <small>(Calculée sur {{ comment.ad.comments|length }} avis)</small>
+                                        </div>
+                                    </div>
+                                </h4>
+                            </div>
+                            {% for comment in comment.ad.comments %}
+                                <div class="bg-secondary rounded mb-3 p-3">
+                                    <strong>{{ comment.author.firstName }}</strong> a dit :
+                                    <blockquote>{{ comment.content }}</blockquote>
+                                    <strong>Note donnée : </strong>
+                                    {% include 'partials/rating.html.twig' with {'rating': comment.rating} %}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="alert alert-warning mb-0">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Cette annonce n'a pas encore reçu de commentaires.</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mt-3 mt-md-0">
+                <div class="card p-3">
+                    <h5 class="card-header">L'auteur du commentaire</h5>
+                    <div class="card-body">
+                        <div class="alert alert-info alert-dismissible mb-4 px-3">
+                            <button type="button" class="close pl-0" data-dismiss="alert">&times;</button>
+                            <i class="fas fa-info-circle"></i>
+                            Vous pouvez visualiser l'auteur du commentaire
+                        </div>
+                        <div class="card border-info p-3">
+                            <div class="card-header d-flex flex-column align-items-center">
+                                <img src="{{ comment.author.picture }}" class="rounded-circle" width="100px" alt="Avatar de {{ comment.author.fullName }}">
+                                <div class="my-3 text-center">
+                                    <a href="{{ path('user_show', {'slug': comment.author.slug}) }}" class="text-info"><h3 class="my-0">{{ comment.author.fullName }}</h3></a>
+                                    <div class="text-muted">{{ comment.author.email }}</div>
+                                </div>
+                                <div class="badge badge-info mx-auto">{{ comment.author.ads |length }} annonces</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text">{{ comment.author.description | raw }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
