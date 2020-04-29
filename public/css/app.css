@@ -53,3 +53,20 @@ span.rating i {
 .table th, .table td {
     vertical-align: middle;
 }
+
+.page-link {
+    background-color: #3498DB;
+}
+
+.page-link:hover, .page-item.active .page-link {
+    background-color: #2384c6;
+}
+
+.page-link:focus {
+    box-shadow: 0 0 0 0;
+}
+
+.page-item.disabled .page-link {
+    background-color: #3498DB;
+    opacity: 0.65;
+}
