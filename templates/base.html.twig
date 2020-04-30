@@ -5,12 +5,8 @@
         <title>{% block title %}Bienvenue !{% endblock %} | Symfony4</title>
         <meta name="viewport" content="width=device-width, user-scalable=no">
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('/css/fontawesome.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('/css/solid.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('/css/regular.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('/css/brands.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+            <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+            <link rel="shortcut icon" href="https://symfony.com/favicons/favicon.ico">
         {% endblock %}
     </head>
     <body>
@@ -20,9 +16,7 @@
         {% block body %}{% endblock %}
 
         {% block javascripts %}
-            <script src="{{ asset('/js/jquery.min.js') }}"></script>
-            <script src="{{ asset('/js/popper.min.js') }}"></script>
-            <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('build/js/app.js') }}"></script>
         {% endblock %}
 
         {% include 'partials/footer.html.twig' %}

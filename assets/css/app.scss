@@ -1,0 +1,107 @@
+@import url('./bootstrap.min.css');
+@import url('./fontawesome.min.css');
+@import url('./brands.min.css');
+@import url('./regular.min.css');
+@import url('./solid.min.css');
+
+.dropdown-item {
+    &.active, &:active, &:hover, &:focus {
+        background-color: #3498DB;
+    }
+}
+
+div.adtitle {
+    padding: 2rem;
+    background-size: cover;
+    background-position: center center;
+
+    h1, p {
+        color: white;
+    }
+}
+
+div.carousel-caption {
+    position: absolute;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+i {
+    &.fas, &.fab, &.far {
+        margin-right: 0.25rem;
+    }
+    &.fa-star {
+        margin-right: 0;
+    }
+}
+
+a, a:hover, .card-body a, .alert a, .card-body a:hover, .alert a:hover {
+    text-decoration: none;
+    outline: 0;
+}
+
+.datepicker table tr td {
+    &.disabled, &.disabled:hover {
+        color: firebrick !important;
+    }
+
+    &.active.active,
+    &.active.disabled,
+    &.active.disabled.active,
+    &.active.disabled.disabled,
+    &.active.disabled:active,
+    &.active.disabled:hover,
+    &.active.disabled:hover.active,
+    &.active.disabled:hover.disabled,
+    &.active.disabled:hover:active,
+    &.active.disabled:hover:hover,
+    &.active.disabled:hover[disabled],
+    &.active.disabled[disabled],
+    &.active:active,
+    &.active:hover,
+    &.active:hover.active,
+    &.active:hover.disabled,
+    &.active:hover:active,
+    &.active:hover:hover,
+    &.active:hover[disabled],
+    &.active[disabled] {
+        background-color: #258cd1 !important;
+        background-image: none !important;
+    }
+}
+
+span.rating i {
+    color: goldenrod;
+}
+
+/********************
+        ADMIN
+*********************/
+.table {
+    th, td {
+        vertical-align: middle;
+    }
+}
+
+.page-link {
+    background-color: #3498DB;
+
+    &:hover {
+        background-color: #2384c6;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0;
+    }
+}
+
+.page-item {
+    &.active .page-link {
+        background-color: #2384c6;
+    }
+
+    &.disabled .page-link {
+        background-color: #3498DB;
+        opacity: 0.65;
+    }
+}
