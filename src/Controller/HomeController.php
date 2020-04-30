@@ -12,19 +12,15 @@ class HomeController extends AbstractController {
 
     /**
      * @Route("/", name="homepage")
-     * @param AdRepository $adRepositoryepo
+     * @param AdRepository $adRepository
      * @param UserRepository $userRepository
      * @return Response
      */
-    public function home(AdRepository $adRepositoryepo, UserRepository $userRepository) {
-
-        $ads = $adRepositoryepo->findAll();
-        $users = $userRepository->findAll();
-
+    public function home(AdRepository $adRepository, UserRepository $userRepository)
+    {
         return $this->render('home.html.twig', [
-            'title' => 'Hello',
-            'ads' => $ads,
-            'users' => $users
+            'ads' => $adRepository->findBestAds(6),
+            'users' => $userRepository->findBestUsers()
         ]);
     }
 }
