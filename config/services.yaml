@@ -28,3 +28,6 @@ services:
     App\Service\PaginationService:
         arguments:
             $templatePath: 'admin/partials/_pagination.html.twig'
+
+    App\Twig\TwigBootstrapExtension:
+        tags: ['twig.extension']

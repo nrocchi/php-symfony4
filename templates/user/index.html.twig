@@ -12,13 +12,15 @@
                         <img src="{{ user.picture }}" class="rounded-circle mr-lg-3" width="100px" alt="Avatar de {{ user.fullName }}">
                         <div class="my-3 my-lg-0 text-center text-lg-left">
                             <h2 class="my-0">{{ user.fullName }}</h2>
-                            <p class="text-muted">{{ user.email }}</p>
+                            <p class="text-muted mb-0">{{ user.email }}</p>
+                            <div class="mb-3">{{ admin | booleanBadge({'admin': 'Administrateur', 'user': 'Utilisateur'}) }}</div>
                             {% if user is same as (app.user) %}
                                 <a href="{{ path('account_profile') }}" class="card-link text-info d-block d-lg-inline-block mb-2 mb-lg-0 mx-auto mr-lg-3 ">Modifier mon profil</a>
                                 <a href="{{ path('account_password') }}" class="card-link text-info d-block d-lg-inline-block mx-auto ml-lg-auto">Modifier mon mot de passe</a>
                             {% endif %}
                         </div>
-                        <div class="badge badge-info mx-auto mx-lg-0 ml-lg-auto">{{ user.ads |length }} annonces</div>
+                        {% set nbAds = user.ads | length %}
+                        <div class="mx-auto mx-lg-0 ml-lg-auto">{{ (nbAds ~ ' annonces') | badge({'color': 'warning', 'rounded': true}) }}</div>
                     </div>
                     <div class="card-body">
                         <div class="card-text">{{ user.description | raw }}</div>

@@ -176,8 +176,16 @@ class AccountController extends AbstractController
      */
     public function myAccount()
     {
+        $admin = false;
+        foreach ($this->getUser()->getRoles() as $role) {
+            if ($role == 'ROLE_ADMIN'){
+                $admin = true;
+            }
+        }
+
         return $this->render('user/index.html.twig', [
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'admin' => $admin
         ]);
     }
 
