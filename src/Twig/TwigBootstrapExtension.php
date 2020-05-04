@@ -27,7 +27,7 @@ class TwigBootstrapExtension extends AbstractExtension {
         $color = $options['color'];
         $pill = $options['rounded'] ? " badge-pill" : "";
 
-        $template = '<span class="badge badge-%s s%">%s</span>';
+        $template = '<span class="badge badge-%s %s">%s</span>';
 
         return sprintf($template, $color, $pill, $content);
     }

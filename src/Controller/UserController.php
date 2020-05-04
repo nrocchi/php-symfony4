@@ -15,8 +15,16 @@ class UserController extends AbstractController
      */
     public function index(User $user)
     {
+        $admin = false;
+        foreach ($this->getUser()->getRoles() as $role) {
+            if ($role == 'ROLE_ADMIN'){
+                $admin = true;
+            }
+        }
+
         return $this->render('user/index.html.twig', [
             'user' => $user,
+            'admin' => $admin
         ]);
     }
 }
