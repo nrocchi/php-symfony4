@@ -3,14 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Entity\AdLike;
 use App\Entity\Image;
 use App\Form\AdType;
+use App\Repository\AdLikeRepository;
 use App\Repository\AdRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +33,57 @@ class AdController extends AbstractController
         return $this->render('ad/index.html.twig', [
             'ads' => $ads
         ]);
+    }
+
+    /**
+     * Permet de liker ou unliker une annonce
+     *
+     * @Route("/ads/{id}/like", name="ads_like")
+     *
+     * @param Ad $ad
+     * @param ObjectManager $manager
+     * @param AdLikeRepository $repo
+     * @return JsonResponse
+     */
+    public function like(Ad $ad, ObjectManager $manager, AdLikeRepository $repo)
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->json([
+                'code' => 403,
+                'message' => "Unauthorized"
+            ], 403);
+        }
+
+        if ($ad->isLikedByUser($user)) {
+            $like = $repo->findOneBy([
+                'ad' => $ad,
+                'user' => $user
+            ]);
+
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => 'Like supprimé',
+                'likes' => $repo->count(['ad' => $ad])
+            ], 200);
+        }
+
+        $like = new AdLike();
+        $like->setAd($ad)
+            ->setUser($user);
+
+        $manager->persist($like);
+        $manager->flush();
+
+        return $this->json([
+            'code' => 200,
+            'message' => 'Like ajouté',
+            'likes' => $repo->count(['ad' => $ad])
+        ], 200);
     }
 
     /**

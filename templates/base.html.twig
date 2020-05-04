@@ -17,6 +17,47 @@
 
         {% block javascripts %}
             <script src="{{ asset('build/js/app.js') }}"></script>
+
+            {# Like Button AJAX #}
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <script>
+                document.querySelectorAll('a.js-link').forEach(function (link) {
+                    link.addEventListener('click', onClickLikeBtn);
+                });
+
+                function onClickLikeBtn(event) {
+                    event.preventDefault();
+                    const url = this.href;
+                    const spanLikesNb = this.querySelector('span.js-likes');
+                    const spanLikesText = this.querySelector('span.js-label');
+                    const icon = this.querySelector('i');
+                    const color = this.querySelector('div.btn');
+
+                    axios.get(url).then(function(response) {
+
+                        spanLikesNb.textContent = ' (' + response.data.likes + ')';
+
+                        if (color.classList.contains('btn-success')) {
+                            color.classList.replace('btn-success', 'btn-danger');
+                            icon.classList.replace('fa-thumbs-up', 'fa-thumbs-down');
+                            spanLikesText.textContent = "Je n'aime plus";
+                        }
+                        else {
+                            color.classList.replace('btn-danger', 'btn-success');
+                            spanLikesText.textContent = "J'aime";
+                            icon.classList.replace('fa-thumbs-down', 'fa-thumbs-up');
+                        }
+
+                    }).catch(function (error) {
+                        if (error.response.status === 403) {
+                            window.alert("Vous ne pouvez pas liker un article si vous n'êtes pas connecté.")
+                        }
+                        else {
+                            window.alert("Une erreur s'est produite, réessayez plus tard.")
+                        }
+                    });
+                }
+            </script>
         {% endblock %}
 
         {% include 'partials/footer.html.twig' %}

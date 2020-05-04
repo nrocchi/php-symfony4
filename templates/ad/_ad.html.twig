@@ -20,17 +20,32 @@
                     <h4 class="card-title">{{ ad.title }}</h4>
                 </a>
                 <p class="card-text">{{ ad.introduction }}</p>
-                <a href="{{ url }}" class="btn btn-info">En savoir plus</a>
-            </div>
-            {% if app.user and app.user == ad.author %}
-                <div class="card-footer pb-0 pt-3 w-100">
-                    <div class="float-right">
-                        <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-info mr-1 mb-3">Modifier</a>
-                        <a href="{{ path('ads_delete', {'slug': ad.slug}) }}" class="btn btn-danger mb-3"
-                           onclick="return confirm(`Etes-vous sûr de vouloir supprimer l'annonce : {{ ad.title }} ?`)">Supprimer</a>
-                    </div>
+                <a href="{{ url }}" class="btn btn-info mb-3">En savoir plus</a>
+                <div class="float-right mb-3 ml-1">
+                    <a href="{{ path('ads_like', {'id': ad.id}) }}" class="js-link">
+                        {% if app.user and ad.isLikedByUser(app.user) %}
+                            <div class="btn btn-danger">
+                                <i class="fas fa-thumbs-down m-0 mr-1"></i>
+                                <span class="js-label">Je n'aime plus</span>
+                                <span class="js-likes"> ({{ ad.likes | length }})</span>
+                            </div>
+                        {% else %}
+                            <div class="btn btn-success">
+                                <i class="fas fa-thumbs-up m-0 mr-1"></i>
+                                <span class="js-label">J'aime</span>
+                                <span class="js-likes"> ({{ ad.likes | length }})</span>
+                            </div>
+                        {% endif %}
+                    </a>
                 </div>
-            {% endif %}
+                {% if app.user and app.user == ad.author %}
+                    <div class="float-right mb-3">
+                        <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-info mr-1"><i class="fas fa-edit m-0"></i></a>
+                        <a href="{{ path('ads_delete', {'slug': ad.slug}) }}" class="btn btn-danger"
+                           onclick="return confirm(`Etes-vous sûr de vouloir supprimer l'annonce : {{ ad.title }} ?`)"><i class="fas fa-trash m-0"></i></a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

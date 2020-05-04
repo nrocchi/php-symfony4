@@ -96,11 +96,32 @@ class Ad
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AdLike", mappedBy="ad")
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->bookings = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+    }
+
+    /**
+     * Permet de savoir si l'annonce est likée par un user
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function isLikedByUser(User $user)
+    {
+        foreach ($this->likes as $like) {
+            if ($like->getUser() === $user) return true;
+        }
+
+        return false;
     }
 
     /**
@@ -366,6 +387,37 @@ class Ad
             // set the owning side to null (unless already changed)
             if ($comment->getAd() === $this) {
                 $comment->setAd(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AdLike[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(AdLike $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setAd($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(AdLike $like): self
+    {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+            // set the owning side to null (unless already changed)
+            if ($like->getAd() === $this) {
+                $like->setAd(null);
             }
         }
 
